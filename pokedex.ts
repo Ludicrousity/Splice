@@ -97,7 +97,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 6.5,
 		color: "Brown",
 		eggGroups: ["Undiscovered"],
-		requiredItems: ["Alloy Cellulose"],
+		requiredItems: ["Steel Cellulose"],
 		changesFrom: "Arenay",
 	},
 	arenayelectric: {
