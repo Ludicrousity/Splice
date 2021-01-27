@@ -632,11 +632,11 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 	//	evos: ["Golbat-Stacona"],
 	//	eggGroups: ["Flying"],
 	//},
-	//golbat: {
-	//	inherit: true,
-	//	otherFormes: ["Golbat-Stacona"],
-	//	formeOrder: ["Golbat", "Golbat-Stacona"],
-	//},
+	golbat: {
+		inherit: true,
+		otherFormes: ["Golbat-Stacona"],
+		formeOrder: ["Golbat", "Golbat-Stacona"],
+	},
 	//golbatstacona: {
 	//	num: 42,
 	//	name: "Golbat-Stacona",
@@ -652,11 +652,11 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 	//	prevo: "Zubat-Stacona",
 	//	eggGroups: ["Flying"],
 	//},
-	//crobat: {
-	//	inherit: true,
-	//	otherFormes: ["Crobat-Stacona"],
-	//	formeOrder: ["Crobat", "Crobat-Stacona"],
-	//},
+	crobat: {
+		inherit: true,
+		otherFormes: ["Crobat-Stacona"],
+		formeOrder: ["Crobat", "Crobat-Stacona"],
+	},
 	//crobatstacona: {
 	//	num: 169,
 	//	name: "Crobat-Stacona",
