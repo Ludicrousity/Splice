@@ -508,4 +508,40 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "randomNormal",
 		type: "Fairy",
 	},
+	pestilence: {
+		num: 50025,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Pestilence",
+		pp: 10,
+		priority: 0,
+		flags: {authentic: 1},
+		volatileStatus: 'curse',
+		onTryHit(target, source, move) {
+			if (!source.hasType('Ghost')) {
+				delete move.volatileStatus;
+				delete move.onHit;
+				move.self = {boosts: {spe: -1, atk: 1, def: 1}};
+			} else if (move.volatileStatus && target.volatiles['curse']) {
+				return false;
+			}
+		},
+		onHit(target, source) {
+			this.directDamage(source.maxhp / 4, source, source);
+			pokemon.trySetStatus('psn', pokemon);
+		},
+		condition: {
+			onStart(pokemon, source) {
+				this.add('-start', pokemon, 'Curse', '[of] ' + source);
+			},
+			onResidualOrder: 10,
+			onResidual(pokemon) {
+				this.damage(pokemon.baseMaxhp / 4);
+			},
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Poison",
+	},
 };
