@@ -1,6 +1,6 @@
 export const Abilities: {[k: string]: ModdedAbilityData} = {
 	splice: {
-		// Splice's type-changing itself is implemented in statuses.js
+		// Splice's type-changing itself will be implemented in statuses.js once I find it
 		isPermanent: true,
 		name: "Splice",
 		rating: 4,
