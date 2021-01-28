@@ -1,22 +1,27 @@
 export const Items: {[itemid: string]: ModdedItemData} = {
-grasscellulose: {
-		name: "Meadow Plate",
-		spritenum: 282,
-		onPlate: 'Grass',
+	firecellulose: {
+		name: "Fire Cellulose",
+		spritenum: 146,
+		onPlate: 'Fire',
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
-			if (move.type === 'Grass') {
+			if (move && move.type === 'Fire') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
+			if ((source && source.baseSpecies.num === 50000) || pokemon.baseSpecies.num === 50000) {
+				return false;
+			}
+			elif ((source && source.baseSpecies.num === 50026) || pokemon.baseSpecies.num === 50026) {
+				return false;
+			}
+			elif ((source && source.baseSpecies.num === 50027) || pokemon.baseSpecies.num === 50027) {
 				return false;
 			}
 			return true;
 		},
-		forcedForme: "Arceus-Grass",
-		num: 301,
-		gen: 4,
-		isNonstandard: "Unobtainable",
+		forcedForme: "Arenay-Fire", "Dragaia-Fire", "Prismatrix-Fire",
+		num: 50001,
 	},
+};
