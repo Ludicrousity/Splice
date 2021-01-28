@@ -518,15 +518,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 0,
 		flags: {authentic: 1},
 		volatileStatus: 'curse',
-		onTryHit(target, source, move) {
-			if (!source.hasType('Ghost')) {
-				delete move.volatileStatus;
-				delete move.onHit;
-				move.self = {boosts: {spe: -1, atk: 1, def: 1}};
-			} else if (move.volatileStatus && target.volatiles['curse']) {
-				return false;
-			}
-		},
 		onHit(target, source) {
 			this.directDamage(source.maxhp / 4, source, source);
 			pokemon.trySetStatus('psn', pokemon);
