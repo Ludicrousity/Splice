@@ -2434,4 +2434,27 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		color: "Brown",
 		eggGroups: ["Undiscovered"],
 	},
+	yanmite: {
+		num: 500029
+		name: "Yanmite",
+		types: ["Bug", "Dragon"],
+		baseStats: {hp: 35, atk: 50, def: 35, spa: 50, spd: 35, spe: 35},
+		abilities: {0: "Multiscale", 1: "Mold Breaker", H: "Adaptability"},
+		heightm: 0.3,
+		weightkg: 1.5,
+		color: "Green",
+		evos: "Yanma-Stacona",
+		eggGroups: ["Bug"],
+	},
+      
+	
+      
+      
+      
+      
+      //Yanmite Bug Dragon Multiscale Mold Breaker Adaptability
+	//Yanma
+	//Yanmega
+	
+	//Azurill Fighting Unknown 
 };
