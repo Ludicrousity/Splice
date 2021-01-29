@@ -684,7 +684,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		weather: 'clearsky',
+		onHitField: function(target, source) {
+			this.field.removeWeather('sunnyday');
+			this.field.removeWeather('desolateland');
+			this.field.removeWeather('raindance');
+			this.field.removeWeather('primordialsea');
+			this.field.removeWeather('hail');
+			this.field.removeWeather('sandstorm');
+		},
 		secondary: null,
 		target: "all",
 		type: "Flying",
