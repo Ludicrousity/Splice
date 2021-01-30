@@ -520,7 +520,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		volatileStatus: 'curse',
 		onHit(target, source) {
 			this.directDamage(source.maxhp / 4, source, source);
-			pokemon.trySetStatus('psn', pokemon);
+			source.trySetStatus('psn', pokemon);
 		},
 		condition: {
 			onStart(pokemon, source) {
