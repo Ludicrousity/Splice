@@ -1020,8 +1020,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		accuracy: 100,
 		basePower: 80,
 		basePowerCallback(pokemon, target, move) {
-			if (target.status === 'frz') return move.basePower * 2;
-			return move.basePower;
+		        if (target.status === 'frz') return move.basePower * 2;
+		        return move.basePower;
 		},
 		category: "Physical",
                 desc: "This attack inflicts big damage on a frozen target, but cures it of its condition.",
