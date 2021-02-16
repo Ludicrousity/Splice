@@ -1024,6 +1024,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			return move.basePower;
 		},
 		category: "Physical",
+                desc: "This attack inflicts big damage on a frozen target, but cures it of its condition.",
+		shortDesc: "This attack inflicts big damage on a frozen target, but cures it of its condition.",
 		name: "Shatter",
 		pp: 10,
 		priority: 0,
@@ -1034,5 +1036,213 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
+	},
+	maniclunge: {
+		num: 50056,
+		accuracy: 100,
+		basePower: 60,
+		category: "Physical",
+		desc: "An attack that hits first and makes the target flinch. It only works the first turn the user is in battle. May cause Paralysis.",
+		shortDesc: "An attack that hits first and makes the target flinch. It only works the first turn the user is in battle. May cause Paralysis.",
+		name: "Manic Lunge",
+		pp: 10,
+		priority: 3,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onTry(pokemon, target) {
+			if (pokemon.activeMoveActions > 1) {
+				this.attrLastMove('[still]');
+				this.add('-fail', pokemon);
+				this.hint("Manic Lunge only works on your first turn out.");
+				return null;
+			}
+		},
+		secondaries: [
+			{
+				chance: 20,
+				status: 'par',
+			}, {
+				chance: 100,
+				volatileStatus: 'flinch',
+			},
+		],
+		target: "normal",
+		type: "Dark",
+	},
+	frostarmor: {
+		num: 50057,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "The user envelops itself in frost, sharply raising Def. and Sp. Def, but lowering Speed.",
+		shortDesc: "The user envelops itself in frost, sharply raising Def. and Sp. Def, but lowering Speed.",
+		name: "Frost Armor",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1},
+		boosts: {
+			def: 2,
+			spd: 2,
+			spe: -1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Ice",
+	},
+	glitterbomb: {
+		num: 50058,
+		accuracy: 100,
+		basePower: 90,
+		category: "Special",
+		desc: "The user launches a ball of glitter, which bursts and lowers Accuracy of all Pokémon on the field that aren't Fairy Type",
+		shortDesc: "The user launches a ball of glitter, which bursts and lowers Accuracy of all Pokémon on the field that aren't Fairy Type",
+		name: "Glitter Bomb",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			//This needs to only apply to non-fairy types
+			chance: 100,
+			boosts: {
+				acc: -1,
+			},
+		},
+		target: "allAdjacent",
+		type: "Fairy",
+	},
+	flashfreeze: {
+		num: 50059,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		desc: "The user launches a quick flurry of ice and freezes the foe. This move always goes last.",
+		shortDesc: "The user launches a quick flurry of ice and freezes the foe. This move always goes last.",
+		name: "Flash Freeze",
+		pp: 20,
+		priority: -6,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		status: 'frz',
+		ignoreImmunity: false,
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
+	glacialquake: {
+		num: 50060,
+		accuracy: 100,
+		basePower: 110,
+		category: "Physical",
+		desc: "The user strikes the ground with its Glacier-like tail, sending chilling shockwaves that damages every grounded Pokémon around it.",
+		shortDesc: "The user strikes the ground with its Glacier-like tail, sending chilling shockwaves that damages every grounded Pokémon around it.",
+		name: "Glacial Quake",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Flying') return 3;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
+	cellstruction: {
+		num: 50061,
+		accuracy: 90,
+		basePower: 120,
+		category: "Physical",
+		desc: "The user charges at the target, using up all of its cellular energy in the process. The user must rest on the next turn.",
+		shortDesc: "The user charges at the target, using up all of its cellular energy in the process. The user must rest on the next turn.",
+		name: "Cell-Struction",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, recharge: 1, protect: 1, mirror: 1},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		onModifyType(move, pokemon) {
+			let type = pokemon.types[0];
+			if (type === "Bird") type = "???";
+			move.type = type;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
+	obsessiondance: {
+		num: 50062,
+		accuracy: 100,
+		basePower: 80,
+		basePowerCallback(pokemon, target, move) {
+			if (target.volatileStatus === 'attract') return move.basePower * 2;
+			return move.basePower;
+		},
+		category: "Physical",
+		desc: "The user shows its possessive love in the form of a deadly dance. Double damage to infatuated targets.",
+		shortDesc: "The user shows its possessive love in the form of a deadly dance. Double damage to infatuated targets.",
+		name: "Obsession Dance",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Fairy",
+	},
+	reconfigure: {
+		num: 50063,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "The user reconfigures its cell structure to restore some HP. The power of its next move is boosted, if the move is the same type as the user.",
+		shortDesc: "The user reconfigures its cell structure to restore some HP. The power of its next move is boosted, if the move is the same type as the user.",
+		name: "Reconfigure",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, heal: 1},
+		onModifyType(move, pokemon) {
+			let type = pokemon.types[0];
+			if (type === "Bird") type = "???";
+			move.type = type;
+		},
+		//This needs to only boost the move if it matches the user's type
+		/*onHit(pokemon) {
+			this.add('-activate', pokemon, 'move: Reconfigure');
+		},
+		condition: {
+			duration: 1,
+			onRestart(pokemon) {
+				this.effectData.duration = 1;
+			},
+			onBasePowerPriority: 9,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Electric') {
+					this.debug('charge boost');
+					return this.chainModify(2);
+				}
+			},
+		},*/
+		heal: [1, 3],
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
+	celldrain: {
+		num: 50064,
+		accuracy: 100,
+		basePower: 40,
+		category: "Special",
+		desc: "A molecular draining attack, that changes to match the user's type. The user's HP is restored by half the damage dealt.",
+		shortDesc: "A molecular draining attack, that changes to match the user's type. The user's HP is restored by half the damage dealt.",
+		name: "Cell Drain",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		drain: [1, 2],
+		onModifyType(move, pokemon) {
+			let type = pokemon.types[0];
+			if (type === "Bird") type = "???";
+			move.type = type;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
 	},
 };
